@@ -1,0 +1,51 @@
+<!-- <div [formGroup]='form' >
+    <div formArrayName='names' *ngFor='let name of form.controls.names.controls;let i = index' >
+        <input [formControlName]='i' type='text' />
+    </div>
+    <div>
+        <input type='number' formControlName='mobile' />
+    </div>
+    <div formArrayName='addresses' *ngFor='let address of form.controls.addresses.controls;let i = index' >
+        <div [formGroupName]='i'>
+            PIN <input type='text' formControlName='pin' /><br />
+            <div formArrayName='cities' *ngFor='let city of address.controls.cities.controls; let i=index'>
+                CITY: <input type='text' [formControlName]='i' />
+            </div>
+            <div>
+                <input type='button' (click)='addCity(i)' value='Add City'/>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<input type='button' (click)='addName()' value='Add Name' />
+<input type='button' (click)='addAddress()' value='Add Address' />
+
+
+{{ form.getRawValue()  | json}}
+
+ -->
+
+ <form [formGroup]="usersForm" (ngSubmit)="onSubmit()">
+    <ng-container *ngFor="let userFormGroup of usersForm.controls.['users'].controls; let i = index">
+      <div [formGroup]="userFormGroup">
+        <label>
+          First name:
+          <input type="text" formControlName="firstName">
+        </label>
+        <label>
+          Last name:
+          <input type="text" formControlName="lastName">
+        </label>
+        <label>
+          Email:
+          <input type="text" formControlName="email">
+        </label>
+        <label>
+          <button (click)="removeFormControl(i)">remove formGroup</button>
+        </label>
+      </div>
+    </ng-container>
+  </form>
+  <button (click)="addFormControl()">add new user formGroup</button>
